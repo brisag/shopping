@@ -1,3 +1,5 @@
+require 'date'
+
 class Market
   attr_reader :name, :vendors, :date
   def initialize(name)
@@ -57,4 +59,34 @@ end
       item if data[:vendors].count > 1 && data[:quantity] > 50
     end.compact
   end
-end
+
+#iteration 4
+#   def sell(item, quantity)
+#     inventory = total_inventory
+#     to_be_sold = quantity
+#     if inventory[item][:quantity] < quantity
+#       false #does not satisfy
+#     else
+#       # require "pry"; binding.pry
+#       vendors = vendors_that_sell(item)
+#       vendors.each do |vendor|
+#         to_be_sold -= vendor.inventory[item]
+#         vendor.inventory[item] -= quantity
+#         break if to_be_sold == 0
+#       end
+#       true #to satisfy the given quantity
+#     end
+#   end
+# end
+#
+# . If the Market's has enough of the item in stock to satisfy the given quantity, this method should return `true`.
+# Additionally, this method should reduce the stock of the Vendors. It should look through the
+# Vendors in the order they were added and sell the item from the first Vendor with that item in stock.
+# If that Vendor does not have enough stock to satisfy the given quantity, the Vendor's entire stock of that item will be depleted,
+# and the remaining quantity will be sold from the next vendor with that item in stock. It will follow this pattern until
+# the entire quantity requested has been sold.
+# #
+# # For example, suppose vendor1 has 35 `peaches` and vendor3 has 65 `peaches`,
+# and vendor1 was added to the market first. If the method `sell(<ItemXXX,
+#   @name = 'Peach'...>, 40)` is called, the method should return `true`, vendor1's new stock of
+#   `peaches` should be 0, and vendor3's new stock of `peaches` should be 60.

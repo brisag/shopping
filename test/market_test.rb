@@ -1,8 +1,12 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
 require './lib/item'
 require './lib/vendor'
 require './lib/market'
+require 'date'
+
+
 
 
 class MarketTest < Minitest::Test
@@ -169,6 +173,14 @@ class MarketTest < Minitest::Test
     assert_equal "01-20-2021", market.date
   end
 
+  def test_a_stub_a_date_of_creation
+    market = Market.new("South Pearl Street Farmers Market")
+    Date.stubs(:today).returns(Date.new(2020, 2, 24))
+
+    assert_equal "24/02/2020", market.date
+  end
+
+#iteration 4
   # def test_it_can_sell
   #   market = Market.new("South Pearl Street Farmers Market")
   #
@@ -199,7 +211,7 @@ class MarketTest < Minitest::Test
   #   assert_equal 45, vendor2.check_stock(item4)
   #
   #   assert_equal true, market.sell(item1, 40)
-  #   assert_equal 0, vendor1.check_stock(item1)
+  #   # assert_equal 0, vendor1.check_stock(item1)
   #   assert_equal 60, vendor3.check_stock(item1)
   # end
 end
