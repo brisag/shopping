@@ -32,4 +32,27 @@ class Market
     total
   end
 
+  def list_of_names
+    item_list = []
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item, quantity|
+        item_list << item
+      end
+    end
+    item_list.flatten.uniq
+  end
+
+  def sorted_item_list
+    list_of_names.map do |item|
+      item.name
+    end.sort
+  end
+
+
+#overstocked if it is sold by more than 1 vendor AND the total quantity is greater than 50.
+  def overstocked_items
+    total_inventory.map do |item, data|
+      item if data[:vendors].count > 1 && data[:quantity] > 50
+    end.compact
+  end
 end
